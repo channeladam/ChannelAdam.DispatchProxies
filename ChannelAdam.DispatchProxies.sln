@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChannelAdam.DispatchProxies", "src\ChannelAdam.DispatchProxies\ChannelAdam.DispatchProxies.csproj", "{12208F6A-9D69-433C-8F98-B371E9A11BEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B50D2272-4F54-4230-82BE-4992FE1A3A78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C04B65FF-C2D1-4A61-9ADF-9566A259CB9A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GitVersion.yml = GitVersion.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviourSpecs", "src\BehaviourSpecs\BehaviourSpecs.csproj", "{6AFBFF1D-7454-4FDC-85D8-C042B98FC5E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12208F6A-9D69-433C-8F98-B371E9A11BEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12208F6A-9D69-433C-8F98-B371E9A11BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12208F6A-9D69-433C-8F98-B371E9A11BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12208F6A-9D69-433C-8F98-B371E9A11BEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AFBFF1D-7454-4FDC-85D8-C042B98FC5E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AFBFF1D-7454-4FDC-85D8-C042B98FC5E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AFBFF1D-7454-4FDC-85D8-C042B98FC5E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AFBFF1D-7454-4FDC-85D8-C042B98FC5E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12208F6A-9D69-433C-8F98-B371E9A11BEB} = {B50D2272-4F54-4230-82BE-4992FE1A3A78}
+		{6AFBFF1D-7454-4FDC-85D8-C042B98FC5E9} = {B50D2272-4F54-4230-82BE-4992FE1A3A78}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D1763E0-E192-4131-8E53-563818AC983B}
+	EndGlobalSection
+EndGlobal
