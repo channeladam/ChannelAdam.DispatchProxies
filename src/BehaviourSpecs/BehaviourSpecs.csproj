@@ -49,8 +49,8 @@
     <Reference Include="ChannelAdam.Logging, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ChannelAdam.Logging.2.1.0\lib\netstandard1.3\ChannelAdam.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="ChannelAdam.TestFramework, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ChannelAdam.TestFramework.2.2.0\lib\netstandard1.3\ChannelAdam.TestFramework.dll</HintPath>
+    <Reference Include="ChannelAdam.TestFramework, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ChannelAdam.TestFramework.2.2.1\lib\netstandard1.3\ChannelAdam.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="ChannelAdam.TestFramework.Moq, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ChannelAdam.TestFramework.Moq.2.0.2\lib\netstandard1.3\ChannelAdam.TestFramework.Moq.dll</HintPath>
@@ -117,7 +117,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="BehaviourSpecs.ruleset" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Retrying.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Retrying.feature.cs</LastGenOutput>
