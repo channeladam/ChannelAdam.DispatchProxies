@@ -39,15 +39,18 @@ namespace ChannelAdam.DispatchProxies.Abstractions
 
         #region Public Static Methods
 
-        public static T Create<T>(object objectToProxy)
-        {
-            object proxy = DispatchProxy.Create<T, ObjectDisposableDispatchProxy>();
+        // This will never work because DispatchProxy does not allow the base type (this) to be abstract...
+        // Put code like this into your class that inherits from this class!
+        //public static T Create<T>(object objectToProxy)
+        //{
+        //    object dispatchProxyAsObject = DispatchProxy.Create<T, ObjectDisposableDispatchProxy>();
 
-            var objectDispatchProxy = (ObjectDisposableDispatchProxy)proxy;
-            objectDispatchProxy.ProxiedObject = objectToProxy;
+        //    // DispatchProxy.Create() actually returns a 'T' but the cast below to ObjectDisposableDispatchProxy won't compile if it isn't declared as 'object'
+        //    var objectDispatchProxy = (ObjectDisposableDispatchProxy)dispatchProxyAsObject;
+        //    objectDispatchProxy.ProxiedObject = objectToProxy;
 
-            return (T)proxy;
-        }
+        //    return (T)dispatchProxyAsObject;
+        //}
 
         #endregion
 
@@ -62,7 +65,7 @@ namespace ChannelAdam.DispatchProxies.Abstractions
         protected override object InvokeMethodOnProxiedObject(MethodInfo targetMethod, object[] args)
         {
             targetMethod = targetMethod ?? throw new ArgumentException(nameof(targetMethod));
-
+            
             try
             {
                 return targetMethod.Invoke(this.ProxiedObject, args);

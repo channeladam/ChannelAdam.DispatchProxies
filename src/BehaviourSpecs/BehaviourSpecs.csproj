@@ -105,6 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DispatchProxy.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DispatchProxy.feature</DependentUpon>
+    </Compile>
+    <Compile Include="DispatchProxyUnitTestSteps.cs" />
     <Compile Include="Retrying.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,13 +118,20 @@
     </Compile>
     <Compile Include="RetryingUnitTestSteps.cs" />
     <Compile Include="TestDoubles\IFakeService.cs" />
+    <Compile Include="TestDoubles\ITestCalculatorToProxy.cs" />
     <Compile Include="TestDoubles\SimpleRetryPolicyFunction.cs" />
+    <Compile Include="TestDoubles\TestCalculatorToProxy.cs" />
+    <Compile Include="TestDoubles\TestObjectDispatchProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="BehaviourSpecs.ruleset" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="DispatchProxy.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DispatchProxy.feature.cs</LastGenOutput>
     </None>
     <None Include="Retrying.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

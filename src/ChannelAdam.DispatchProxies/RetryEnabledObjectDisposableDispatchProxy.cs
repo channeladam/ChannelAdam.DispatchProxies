@@ -42,13 +42,14 @@ namespace ChannelAdam.DispatchProxies
 
         public static T Create<T>(object objectToProxy, IRetryPolicyFunction retryPolicy)
         {
-            object proxy = DispatchProxy.Create<T, RetryEnabledObjectDisposableDispatchProxy>();
+            object dispatchProxyAsObject = DispatchProxy.Create<T, RetryEnabledObjectDisposableDispatchProxy>();
 
-            var retryDispatchProxy = (RetryEnabledObjectDisposableDispatchProxy)proxy;
+            // DispatchProxy.Create() actually returns a 'T' but the cast below to RetryEnabledObjectDisposableDispatchProxy won't compile if it isn't declared as 'object'
+            var retryDispatchProxy = (RetryEnabledObjectDisposableDispatchProxy)dispatchProxyAsObject;
             retryDispatchProxy.ProxiedObject = objectToProxy;
             retryDispatchProxy.RetryPolicy = retryPolicy;
 
-            return (T)proxy;
+            return (T)dispatchProxyAsObject;
         }
 
         #endregion
