@@ -1,6 +1,8 @@
-﻿namespace BehaviourSpecs.TestDoubles
+﻿using ChannelAdam.Disposing.Abstractions;
+
+namespace BehaviourSpecs.TestDoubles
 {
-    public class TestCalculatorToProxy : ITestCalculatorToProxy
+    public class DisposableTestCalculatorToProxy : Disposable, ITestCalculatorToProxy
     {
         public int AddFunction(int x, int y)
         {

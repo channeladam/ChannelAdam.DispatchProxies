@@ -1,16 +1,19 @@
-﻿using BehaviourSpecs.TestDoubles;
-using ChannelAdam.TestFramework.MSTestV2.Abstractions;
+﻿#nullable disable
+
+using BehaviourSpecs.TestDoubles;
+using ChannelAdam.DispatchProxies;
+using ChannelAdam.TestFramework.NUnit.Abstractions;
 using TechTalk.SpecFlow;
-using ChannelAdam.DispatchProxies.Abstractions;
 
 namespace BehaviourSpecs
 {
     [Binding]
-    [Scope(Feature = "Dispatch Proxy")]
-    public class DispatchProxyUnitSteps : MoqTestFixture
+    [Scope(Feature = "Object Dispatch Proxy")]
+    public class ObjectDispatchProxyUnitSteps : MoqTestFixture
     {
         #region Private Fields
 
+        private readonly ScenarioContext _scenarioContext;
         private int _actualOutValue;
         private int _actualReturnedValue;
         private int _actualZAndRefResult;
@@ -23,12 +26,21 @@ namespace BehaviourSpecs
 
         #endregion Private Fields
 
+        public ObjectDispatchProxyUnitSteps(ScenarioContext context)
+        {
+            _scenarioContext = context;
+        }
+
         #region Public Methods
 
         [BeforeScenario]
         public void BeforeScenario()
         {
-            _calculatorProxy = TestObjectDispatchProxy.Create<ITestCalculatorToProxy>(new TestCalculatorToProxy());
+            Logger.Log("---------------------------------------------------------------------------");
+            Logger.Log(_scenarioContext.ScenarioInfo.Title);
+            Logger.Log("---------------------------------------------------------------------------");
+
+            _calculatorProxy = DispatchProxyFactory.CreateObjectDispatchProxy<ITestCalculatorToProxy>(new TestCalculatorToProxy(), new TestObjectInvokeHandler());
 
             _x = 1;
             _y = 2;
@@ -40,7 +52,7 @@ namespace BehaviourSpecs
 
         #region Given
 
-        [Given(@"a proxied function with a return value")]
+        [Given("a proxied function with a return value")]
         public void GivenAProxiedFunctionWithAReturnValue()
         {
             _expectedReturnedValue = _x + _y;
@@ -49,56 +61,56 @@ namespace BehaviourSpecs
             Logger.Log($"EXPECTED: return value={_expectedReturnedValue}");
         }
 
-        [Given(@"a proxied function with in, out and ref parameters")]
-        public void GivenAProxiedFunctionWithInOutAndRefParameters()
+        [Given("a proxied function with all parameters")]
+        public void GivenAProxiedFunctionWithAllParameters()
         {
             _expectedReturnedValue = _expectedOutValue = _x + _y;
             _expectedZAndRefResult = _x + _y + _actualZAndRefResult;
             Logger.Log($"EXPECTED: return value={_expectedReturnedValue}, out value={_expectedOutValue}, ref result={_expectedZAndRefResult}");
         }
 
-        [Given(@"a proxied method with ref parameters")]
-        public void GivenAProxiedMethodWithRefParameters()
+        [Given("a proxied method with all parameters")]
+        public void GivenAProxiedMethodWithAllParameters()
         {
             _expectedReturnedValue = null;
-            _expectedOutValue = null;
+            _expectedOutValue = _x + _y;
             _expectedZAndRefResult = _x + _y + _actualZAndRefResult;
-            Logger.Log($"EXPECTED: ref result={_expectedZAndRefResult}");
+            Logger.Log($"EXPECTED: out value={_expectedOutValue}, ref result={_expectedZAndRefResult}");
         }
 
         #endregion Given
 
         #region When
 
-        [When(@"the proxied function with a return value is called")]
+        [When("the proxied function with a return value is called")]
         public void WhenTheProxiedFunctionWithAReturnValueIsCalled()
         {
             _actualReturnedValue = _calculatorProxy.AddFunction(_x, _y);
             Logger.Log($"ACTUAL: return value={_actualReturnedValue}");
         }
 
-        [When(@"the proxied function with in, out and ref parameters is called")]
-        public void WhenTheProxiedFunctionWithInOutAndRefParametersIsCalled()
+        [When("the proxied function with all parameters is called")]
+        public void WhenTheProxiedFunctionWithAllParametersIsCalled()
         {
             _actualReturnedValue = _calculatorProxy.AddFunctionWithAllParams(_x, _y, ref _actualZAndRefResult, out _actualOutValue);
-            Logger.Log($"ACTUAL: return value={_actualReturnedValue}, out value={_actualOutValue}, ref result={_actualZAndRefResult}");
+            Logger.Log($"ACTUAL: return value={_actualReturnedValue}, ref result={_actualZAndRefResult}, out value={_actualOutValue}");
         }
 
-        [When(@"the proxied method with ref parameters is called")]
+        [When("the proxied method with all parameters is called")]
         public void WhenTheProxiedMethodWithRefParametersIsCalled()
         {
-            _calculatorProxy.AddMethodWithRefParams(_x, _y, ref _actualZAndRefResult);
-            Logger.Log($"ACTUAL: ref result={_actualZAndRefResult}");
+            _calculatorProxy.AddMethodWithAllParams(_x, _y, ref _actualZAndRefResult, out _actualOutValue);
+            Logger.Log($"ACTUAL: ref result={_actualZAndRefResult}, out value={_actualOutValue}");
         }
 
         #endregion When
 
         #region Then
 
-        [Then(@"the value returned from the proxied function with a return value has the correct return value")]
-        [Then(@"the ref parameters from the proxied method have the correct values")]
-        [Then(@"the return value, out and ref parameters from the proxied function have the correct values")]
-        public void ThenAssertResultingValuesFromTheProxiedFunction()
+        [Then("the value returned from the proxied function with a return value has the correct return value")]
+        [Then("the return, out and ref parameters from the proxied function have the correct values")]
+        [Then("the out and ref parameters from the proxied method have the correct values")]
+        public void ThenAssertResultingValuesFromTheProxiedFunctionOrMethod()
         {
             if (_expectedReturnedValue.HasValue)
             {
