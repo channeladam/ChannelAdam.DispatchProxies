@@ -147,7 +147,7 @@ namespace ChannelAdam.DispatchProxies
                     throw new ObjectDisposedException($"Calling {targetMethod.Name} while proxying via {this.GetType().FullName}");
                 }
 
-                if ("Dispose".Equals(targetMethod.Name, StringComparison.InvariantCultureIgnoreCase))
+                if ("Dispose".Equals(targetMethod.Name, StringComparison.OrdinalIgnoreCase))
                 {
                     // Invoke Dispose() on this proxy object, with hooks that should be overriden to invoke it on the actual object
                     this.Dispose();
